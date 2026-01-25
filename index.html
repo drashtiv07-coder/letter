@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>My Forever Valentine ❤️</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --pink-bg: #fff0f3;
+    --heart-red: #ff4d6d;
+    --dark-pink: #c9184a;
+    --love-pink: #ff77a9;
+}
+
+body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    background: var(--pink-bg);
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
+    touch-action: manipulation;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    border-radius: 28px;
+    padding: 2rem;
+    width: 92%;
+    max-width: 500px;
+    min-height: 85vh;
+    box-shadow: 0 25px 60px rgba(255,75,109,0.25);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    will-change: transform, opacity;
+}
+
+.section-hidden { display: none; }
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    color: var(--heart-red);
+    font-size: 2.2rem;
+}
+
+.btn-custom {
+    border-radius: 50px;
+    padding: 14px;
+    font-weight: 700;
+    width: 100%;
+    font-size: 1.1rem;
+    margin-top: 12px;
+    will-change: transform;
+}
+
+.btn-yes {
+    background: var(--heart-red);
+    color: white;
+    border: none;
+}
+
+.btn-yes:hover {
+    background: var(--dark-pink);
+    transform: scale(1.08);
+}
+
+#no-btn {
+    background: #ffb3c1;
+    color: white;
+    border: none;
+    transition: left 0.3s ease, top 0.3s ease, transform 0.2s ease;
+}
+
+.gift-box {
+    padding: 18px;
+    border-radius: 18px;
+    border: 2px solid #ffccd5;
+    background: white;
+    cursor: pointer;
+    will-change: transform;
+    transition: transform 0.3s ease;
+}
+
+.gift-box:hover {
+    transform: translateY(-8px) scale(1.1) rotate(-3deg);
+    background: #ffccd5;
+}
+
+.heart {
+    position: absolute;
+    bottom: -10%;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0px); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+  100% { transform: translateX(0px); }
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+
+.progress {
+  background: #ffe0e6;
+  border-radius:8px;
+}
+
+.progress-bar {
+  transition: width 0.4s ease-in-out;
+}
+
+@media(max-width:576px){
+    h1 { font-size: 2rem; }
+}
+
+/* SWIPE ANIMATION */
+.swipe-left {
+  animation: swipeLeft 0.35s forwards;
+}
+.swipe-right {
+  animation: swipeRight 0.35s forwards;
+}
+
+@keyframes swipeLeft {
+  0% { transform: translateX(0); opacity:1; }
+  100% { transform: translateX(-120%) scale(0.9); opacity:0; }
+}
+
+@keyframes swipeRight {
+  0% { transform: translateX(0); opacity:1; }
+  100% { transform: translateX(120%) scale(0.9); opacity:0; }
+}
+
+/* Typing effect */
+.typing { 
+    border-right: .1em solid var(--heart-red); 
+    white-space: nowrap; 
+    overflow: hidden; 
+}
+
+</style>
+</head>
+<body>
+
+<div id="heart-container"></div>
+
+<div class="container">
+
+<!-- PROPOSAL -->
+<div id="section-proposal" class="card">
+    <img src="https://media.giphy.com/media/cLS1cfxvGOPVpf9g3y/giphy.gif" style="height:150px" class="mx-auto mb-3">
+    <h1>Will you be mine? 🥺</h1>
+    <p>I promise to love you more with every heartbeat.</p>
+    <button class="btn-custom btn-yes" id="yes-btn">YES</button>
+    <button class="btn-custom" id="no-btn">NO</button>
+</div>
+
+<!-- CELEBRATION -->
+<div id="section-celebration" class="card section-hidden">
+
+    <h1>YAAAY ❤️</h1>
+    <p>You made me the happiest.</p>
+
+    <!-- Love Meter -->
+    <h5>Our Love Meter ❤️</h5>
+    <div class="progress mb-3" style="height:12px; border-radius:8px;">
+        <div id="love-meter" class="progress-bar bg-danger" role="progressbar" style="width:0%;"></div>
+    </div>
+
+    <button class="btn-custom btn-yes" onclick="showSection('section-quiz')">START QUIZ →</button>
+</div>
+
+<!-- QUIZ -->
+<div id="section-quiz" class="card section-hidden">
+    <h1>Relationship Quiz 🧩</h1>
+
+    <!-- Quiz Progress Bar -->
+    <div class="progress mb-3" style="height:12px; border-radius:8px;">
+        <div id="quiz-progress" class="progress-bar bg-danger" role="progressbar" style="width:0%;"></div>
+    </div>
+
+    <div class="quiz-q" id="quiz-q1">
+        <p>Who is the luckiest person here?</p>
+        <button class="btn-custom btn-yes quiz-btn" onclick="nextQuiz('quiz-q1','quiz-q2',25)">Me, because I have you ❤️</button>
+        <button class="btn-custom btn-yes quiz-btn" onclick="nextQuiz('quiz-q1','quiz-q2',25)">You, because you have me 😘</button>
+    </div>
+
+    <div class="quiz-q section-hidden" id="quiz-q2">
+        <p>When did I fall for you?</p>
+        <button class="btn-custom btn-yes quiz-btn" onclick="wrongAnswer('quiz-q2')">First week</button>
+        <button class="btn-custom btn-yes quiz-btn" onclick="nextQuiz('quiz-q2','quiz-q3',50)">The first time we laughed together 💕</button>
+    </div>
+
+    <div class="quiz-q section-hidden" id="quiz-q3">
+        <p>What do I love most about you?</p>
+        <button class="btn-custom btn-yes quiz-btn" onclick="nextQuiz('quiz-q3','quiz-q4',75)">Your smile 😊</button>
+        <button class="btn-custom btn-yes quiz-btn" onclick="nextQuiz('quiz-q3','quiz-q4',75)">Your kind heart 💖</button>
+        <button class="btn-custom btn-yes quiz-btn" onclick="nextQuiz('quiz-q3','quiz-q4',75)">Everything. Absolutely everything 🥹</button>
+    </div>
+
+    <div class="quiz-q section-hidden" id="quiz-q4">
+        <p>Final question…</p>
+        <h5>Do you know how much I love you?</h5>
+        <button class="btn-custom btn-yes" onclick="finishQuiz()">To the moon and back 🌙</button>
+    </div>
+</div>
+
+<!-- GIFTS -->
+<div id="section-gifts" class="card section-hidden">
+    <h1>Your Gifts 🎁</h1>
+    <div class="row g-3 mt-3">
+        <div class="col-4"><div class="gift-box" onclick="showSection('section-quiz')">🧩<br>Quiz</div></div>
+        <div class="col-4"><div class="gift-box" onclick="showSection('section-letter')">💌<br>Letter</div></div>
+        <div class="col-4"><div class="gift-box" onclick="showSection('section-gallery')">📸<br>Photos</div></div>
+    </div>
+    <button class="btn-custom btn-yes mt-4" onclick="resetApp()">Start Over</button>
+</div>
+
+<!-- LETTER -->
+<div id="section-letter" class="card section-hidden">
+    <h1>My Letter 💌</h1>
+    <p class="typing"></p>
+    <button class="btn-custom btn-yes" onclick="showSection('section-gifts')">Back</button>
+</div>
+
+<!-- GALLERY -->
+<div id="section-gallery" class="card section-hidden">
+    <h1>Memories 📸</h1>
+    <img src="https://via.placeholder.com/200" class="img-fluid rounded mb-3">
+    <button class="btn-custom btn-yes" onclick="showSection('section-gifts')">Back</button>
+</div>
+
+<!-- Sounds -->
+<audio id="yes-sound" src="https://www.myinstants.com/media/sounds/magic-chime.mp3"></audio>
+<audio id="wrong-sound" src="https://www.myinstants.com/media/sounds/wrong-answer-sound-effect.mp3"></audio>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+let yesSize = 18;
+
+/* NO BUTTON MOVING */
+$("#no-btn").on("touchstart mouseover", function(e){
+    e.preventDefault();
+    navigator.vibrate?.(40);
+    const card = $("#section-proposal");
+    $(this).css({
+        position:'absolute',
+        left: Math.random()*(card.width()-80),
+        top: Math.random()*(card.height()-80),
+        transform:'scale(1.05)'
+    });
+    yesSize += 5;
+    $("#yes-btn").css("font-size", yesSize+"px");
+});
+
+/* FLOATING HEARTS */
+function floatingHearts(){
+    const h = $('<div class="heart">💖</div>');
+    h.css({left:Math.random()*100+'vw', fontSize:15+Math.random()*25});
+    $("#heart-container").append(h);
+    h.animate({top: "-=120vh", opacity:0}, 6000, ()=>h.remove());
+}
+setInterval(floatingHearts, 300);
+
+/* SHOW SECTION */
+function showSection(id){
+    $(".card:visible").fadeOut(200,()=>{
+        $("#"+id).fadeIn(300);
+        if(id=="section-letter") typeText(document.querySelector("#section-letter p"), "My Love, Every moment with you feels like a dream I never want to wake up from. You are my happiness, my comfort, and my favorite part of every day. I love your smile, your kind heart, and the way you make me feel safe and loved. No matter what happens, I promise to stand by you, laugh with you, and love you more with every heartbeat. You are my forever, my best friend, and the love of my life. Always yours, [Your Name] ❤️",50);
+    });
+}
+
+/* CELEBRATION */
+$("#yes-btn").click(function(){
+    document.getElementById("yes-sound").play();
+    confetti({particleCount:200, spread:90, origin:{y:0.6}});
+    
+    // Heart explosion
+    for(let i=0;i<20;i++){
+        const heart = $('<div class="heart">💖</div>');
+        heart.css({
+            left: $("#yes-btn").offset().left + $("#yes-btn").width()/2 + (Math.random()*60-30),
+            top: $("#yes-btn").offset().top,
+            fontSize: 15 + Math.random()*15
+        });
+        $("body").append(heart);
+        heart.animate({top: "-=300px", opacity:0}, 1500, ()=>heart.remove());
+    }
+    showSection("section-celebration");
+});
+
+/* LOVE METER UPDATE */
+function updateLoveMeter(value){
+    $("#love-meter").css("width", value+"%");
+}
+
+/* RESET */
+function resetApp(){ location.reload(); }
+
+/* QUIZ NEXT */
+function nextQuiz(current, next, progress){
+    navigator.vibrate?.(30);
+    $("#"+current).addClass("swipe-left");
+    setTimeout(()=>{
+        $("#"+current).hide().removeClass("swipe-left");
+        $("#"+next).show();
+    },350);
+    $("#quiz-progress").css("width", progress+"%");
+    updateLoveMeter(progress);
+}
+
+/* WRONG ANSWER */
+function wrongAnswer(current){
+    document.getElementById("wrong-sound").play();
+    navigator.vibrate?.([20,40,20]);
+    const el = $("#"+current);
+    el.addClass("shake");
+    setTimeout(()=> el.removeClass("shake"),500);
+    alert("Oops 😜 try the other option!");
+}
+
+/* FINISH QUIZ */
+function finishQuiz(){
+    updateLoveMeter(100);
+    alert("YAY! You completed the quiz ❤️");
+    showSection("section-gifts");
+}
+
+/* SHOW SECTION */
+function showSection(id){
+    $(".card:visible").fadeOut(200,()=>{
+        $("#"+id).fadeIn(300);
+
+        // If it's the letter section, start typing the love letter
+        if(id=="section-letter") {
+            typeText(document.querySelector("#section-letter p"), 
+            "My Love,\n\nEvery moment with you feels like a dream \nI never want to wake up from. \nYou are my happiness, my comfort, \nand my favorite part of every day. \nI love your smile, your kind heart, \nand the way you make me feel safe and loved.\nNo matter what happens, \nI promise to stand by you, laugh with you, \nand love you more with every heartbeat. \nYou are my forever, my best friend, \nand the love of my life.\n\nAlways yours, Drashti ❤️", 30);
+        }
+    });
+}
+
+/* TYPING EFFECT */
+function typeText(el,text,speed=50){
+    el.innerHTML = "";
+    let i=0;
+    function type(){ 
+        if(i<text.length){ 
+            // Handle new lines for HTML
+            if(text[i] === "\n") el.innerHTML += "<br>";
+            else el.innerHTML += text[i]; 
+            i++; 
+            setTimeout(type,speed); 
+        } 
+    }
+    type();
+}
+
+/* MOBILE SWIPE SUPPORT */
+let startX=0;
+document.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+document.addEventListener("touchend",e=>{
+    let diff=e.changedTouches[0].clientX-startX;
+    if(diff>100) showSection("section-gifts");
+});
+</script>
+
+</body>
+</html>
