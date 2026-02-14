@@ -250,10 +250,23 @@ h1 {
 
 <!-- GALLERY -->
 <div id="section-gallery" class="card section-hidden">
-    <h1>Memories 📸</h1>
-    <img src="https://via.placeholder.com/200" class="img-fluid rounded mb-3">
-    <button class="btn-custom btn-yes" onclick="showSection('section-gifts')">Back</button>
+    <h1>Pics 📸</h1>
+
+    <div class="row g-2">
+        <div class="col-6">
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=500" class="img-fluid rounded">
+        </div>
+        <br>
+        <div class="col-6">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500" class="img-fluid rounded mb-3">
+
+        </div>
+        
+    </div>
+
+    <button class="btn-custom btn-yes mt-3" onclick="showSection('section-gifts')">Back</button>
 </div>
+
 
 <!-- Sounds -->
 <audio id="yes-sound" src="https://www.myinstants.com/media/sounds/magic-chime.mp3"></audio>
